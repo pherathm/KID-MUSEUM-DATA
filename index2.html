@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>KID Museum – Shiny-Style Data Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Optional nice font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f5f7;
+      color: #111827;
+    }
+
+    /* Top navbar (Shiny-style tabs) */
+    .navbar {
+      background: #111827;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .brand-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #f97316, #ec4899);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .brand-sub {
+      font-size: 0.75rem;
+      opacity: 0.8;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .nav-tab {
+      border: none;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: transparent;
+      color: #e5e7eb;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+      border: 1px solid transparent;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-tab:hover {
+      background: #1f2937;
+    }
+
+    .nav-tab.active {
+      background: white;
+      color: #111827;
+      border-color: #f97316;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 24px auto 40px auto;
+      padding: 0 16px;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section-header {
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin: 0 0 6px 0;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: #4b5563;
+      max-width: 850px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 16px 16px 20px 16px;
+      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.12);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      margin-bottom: 18px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+
+    .map-frame {
+      width: 100%;
+      height: 700px;
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #f3f4ff;
+      color: #4338ca;
+      border: 1px solid #e5e7eb;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin: 24px 0 12px 0;
+    }
+
+    ul {
+      padding-left: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR / TABS -->
+<div class="navbar">
+  <div class="brand">
+    <div class="brand-logo">K</div>
+    <div>
+      <div>KID MUSEUM DATA</div>
+      <div class="brand-sub">School Outreach · Programs · Equity</div>
+    </div>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('overview')">Overview</button>
+    <button class="nav-tab" onclick="showSection('maps')">Maps</button>
+    <button class="nav-tab" onclick="showSection('forecasting')">Forecasting</button>
+    <button class="nav-tab" onclick="showSection('demographics')">School Demographics</button>
+    <button class="nav-tab" onclick="showSection('about')">About</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- OVERVIEW TAB -->
+  <section id="overview" class="section active">
+    <div class="section-header">
+      <h1 class="section-title">Overview</h1>
+      <p class="section-subtitle">
+        This Shiny-style dashboard is built with static HTML and GitHub Pages. It provides a home
+        for KID Museum’s school outreach data, interactive maps, and future forecasting charts.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">What’s in this dashboard?</div>
+      <div class="card-subtitle">Quick tour of the tabs (similar to a Shiny app layout).</div>
+      <ul style="font-size: 0.9rem; color: #4b5563; line-height: 1.6;">
+        <li><b>Maps:</b> Interactive Folium map of schools, programs, and equity buffers.</li>
+        <li><b>Forecasting:</b> Placeholder for time-series and capacity charts.</li>
+        <li><b>School Demographics:</b> Placeholder for tables/visuals on Title I, CEP, FARMs, URM, etc.</li>
+        <li><b>About:</b> Context on the project and data sources.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- MAPS TAB -->
+  <section id="maps" class="section">
+    <div class="section-header">
+      <h1 class="section-title">Maps</h1>
+      <p class="section-subtitle">
+        Explore KID Museum’s school partners and equity-focused buffers around the Ft Totten and
+        Bethesda Metro locations. Click points and polygons for details.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Schools, Programs & Buffers Map</div>
+      <div class="card-subtitle">
+        This map is loaded from <code>kid_schools_programs_buffers_with_legend.html</code> in this repository.
+      </div>
+
+      <!-- IMPORTANT: This assumes the map file is in the same repo root -->
+      <iframe
+        class="map-frame"
+        src="kid_schools_programs_buffers_with_legend.html"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- FORECASTING TAB -->
+  <section id="forecasting" class="section">
+    <div class="section-header">
+      <h1 class="section-title">Forecasting (Coming Soon)</h1>
+      <p class="section-subtitle">
+        This section can host time-series charts and capacity models, similar to Shiny “tabPanel”
+        outputs (e.g., monthly field trip counts, after-school attendance, attrition rates).
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Planned visuals</div>
+      <div class="card-subtitle">Ideas for what you can embed here later.</div>
+      <ul style="font-size: 0.9rem; color: #4b5563; line-height: 1.6;">
+        <li>Monthly/quarterly field trip bookings vs. actual attendance.</li>
+        <li>Program popularity by grade, district, and season.</li>
+        <li>Retention curves for after-school cohorts.</li>
+        <li>Forecasted demand for specific months or days of the week.</li>
+      </ul>
+      <p style="font-size: 0.85rem; color: #6b7280; margin-top: 8px;">
+        When your Plotly or Streamlit charts are ready, you can export them as HTML files
+        (e.g., <code>field_trip_forecast.html</code>) and embed them here using another
+        <code>&lt;iframe&gt;</code>, just like the map.
+      </p>
+    </div>
+  </section>
+
+  <!-- DEMOGRAPHICS TAB -->
+  <section id="demographics" class="section">
+    <div class="section-header">
+      <h1 class="section-title">School Demographics (Coming Soon)</h1>
+      <p class="section-subtitle">
+        Space for visualizing Title I, CEP, FARMs rates, and “underserved” / “underrepresented”
+        status across districts and school levels.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Possible content</div>
+      <div class="card-subtitle">Ideas for tables and charts.</div>
+      <ul style="font-size: 0.9rem; color: #4b5563; line-height: 1.6;">
+        <li>Summary table of MCPS/DCPS schools by equity flags.</li>
+        <li>Bar charts of % Title I / CEP by region.</li>
+        <li>Maps or small multiples focused only on high-FARMs or underserved schools.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ABOUT TAB -->
+  <section id="about" class="section">
+    <div class="section-header">
+      <h1 class="section-title">About This Dashboard</h1>
+      <p class="section-subtitle">
+        This is a static, Shiny-style data site built with HTML, CSS, and a little JavaScript,
+        hosted on GitHub Pages. It is designed to support KID Museum’s data storytelling and
+        sponsor conversations.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">How it works</div>
+      <div class="card-subtitle">Technical notes in simple language.</div>
+      <ul style="font-size: 0.9rem; color: #4b5563; line-height: 1.6;">
+        <li>The site is hosted on GitHub Pages in the <code>KID-MUSEUM-DATA</code> repository.</li>
+        <li>Tabs at the top are controlled by a small JavaScript function (like Shiny’s tabs).</li>
+        <li>The main map is a Folium HTML export embedded via <code>&lt;iframe&gt;</code>.</li>
+        <li>More charts or maps can be added later as additional HTML files and iframes.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  KID Museum · Shiny-Style Data Dashboard · Hosted on GitHub Pages
+</footer>
+
+<script>
+  // Simple tab switcher (like Shiny navbarPage)
+  function showSection(id) {
+    // sections
+    document.querySelectorAll('.section').forEach(sec => {
+      sec.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+
+    // tabs
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.classList.remove('active');
+    });
+    // find the button whose onclick contains the id
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      if (tab.getAttribute('onclick').includes("'" + id + "'")) {
+        tab.classList.add('active');
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
