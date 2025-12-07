@@ -1,1 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>KID Museum – School Outreach Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Optional nice font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f5f7;
+      color: #111827;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #f97316, #ec4899);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .tagline {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 24px auto 40px auto;
+      padding: 0 16px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6b7280;
+    }
+
+    .page-title {
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin: 0 0 14px 0;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      color: #4b5563;
+      max-width: 800px;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: 2.3fr 1fr;
+        align-items: flex-start;
+      }
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 14px 14px 18px 14px;
+      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.12);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+
+    .map-frame {
+      width: 100%;
+      height: 700px;
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #f3f4ff;
+      color: #4338ca;
+      border: 1px solid #e5e7eb;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin: 24px 0 12px 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-logo">K</div>
+    <div>
+      <div>KID MUSEUM DATA</div>
+      <div class="tagline">School Outreach · Equity Buffers · Programs</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="section-title">Dashboard</div>
+  <h1 class="page-title">School Outreach & Equity Map</h1>
+  <p class="description">
+    This interactive map shows KID Museum’s school partners, program visits, and equity-focused
+    buffers (Title I, CEP, FARMs, underserved, and underrepresented) around the Ft Totten and
+    Bethesda Metro locations.
+  </p>
+
+  <div class="grid">
+    <!-- LEFT: MAIN MAP -->
+    <section class="card">
+      <div class="card-title">KID Museum – Schools, Programs & Buffers</div>
+      <div class="card-subtitle">
+        Interactive Folium map (click points and buffers for details).
+      </div>
+
+      <!-- IMPORTANT: relative path to your big HTML map file -->
+      <iframe
+        class="map-frame"
+        src="kid_schools_programs_buffers_with_legend.html"
+        loading="lazy"
+      ></iframe>
+    </section>
+
+    <!-- RIGHT: NOTES / FUTURE PANELS -->
+    <aside class="card">
+      <div class="card-title">How to read this map</div>
+      <div class="card-subtitle">
+        Summary of key layers and how they connect to KID Museum’s outreach strategy.
+      </div>
+      <ul style="padding-left: 18px; font-size: 0.9rem; color: #4b5563; line-height: 1.5;">
+        <li><b>Dots</b>: MCPS + DC schools (with program participation where applicable).</li>
+        <li><b>Colors</b>: General Admissions, After-School, and Field Trip visits.</li>
+        <li><b>Buffers</b>: 1-mile rings around schools flagged as Title I, CEP, high FARMs,
+            underserved, or underrepresented.</li>
+        <li><b>Rings</b>: 10-mile and 25-mile catchment areas around Ft Totten and
+            Bethesda Metro KID Museum sites.</li>
+      </ul>
+
+      <div class="card-subtitle" style="margin-top: 12px;">Future additions</div>
+      <p style="font-size: 0.85rem; color: #6b7280;">
+        This right-hand panel can later show charts for field trip capacity, program
+        trends, or candidate schools forecasting (bar charts, line charts, or small multiples).
+      </p>
+
+      <div class="pill-list">
+        <span class="pill">Field trip capacity</span>
+        <span class="pill">After-school retention</span>
+        <span class="pill">General Admissions trends</span>
+        <span class="pill">Candidate schools</span>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  KID Museum · School Outreach Dashboard · Built with GitHub Pages & Folium
+</footer>
+
+</body>
+</html>
+
 
